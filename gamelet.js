@@ -16,7 +16,8 @@
 const ball = document.getElementById("ball"); // get the ball
 
 document.addEventListener("keydown", handleKeyPress); // listen for keys
-let position = 0;
+let xPosition = 0;
+let yPosition = 0;
 
 /*
 handleKeyPress
@@ -25,16 +26,29 @@ responds to certain key presses by updation position
 
 function handleKeyPress(e) {
   if (e.code === "ArrowLeft") {
-    position = position - 10;
+    xPosition = xPosition - 10;
   }
 
   if (e.code === "ArrowRight") {
-    position = position + 10;
+    xPosition = xPosition + 10;
   }
 
-  if (position < 0) {
-    position = 0;
+  if (e.code === "ArrowDown") {
+    yPosition = yPosition + 10;
   }
+
+  if (e.code === "ArrowUp") {
+    yPosition = yPosition - 10;
+  }
+
+  if (xPosition < 0) {
+    xPosition = 0;
+  }
+
+  if (yPosition < 0) {
+    yPosition = 0;
+  }
+
   refresh(); //reposition the ball
 }
 
@@ -44,5 +58,6 @@ changes the position of the ball
 */
 
 function refresh() {
-  ball.style.left = position + "px";
+  ball.style.left = xPosition + "px";
+  ball.style.top = yPosition + "px";
 }
